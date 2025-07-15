@@ -2,11 +2,12 @@ import { fromNodeHeaders, toNodeHandler } from "better-auth/node";
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { Application, Request, Response } from "express";
-import { auth } from "./lib/auth";
+import { auth } from "./lib/auth.js";
 
 const PORT = process.env.PORT || 8000;
 
 const app: Application = express();
+
 dotenv.config();
 
 app.use(
