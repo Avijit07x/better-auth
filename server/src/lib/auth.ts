@@ -11,9 +11,12 @@ export const auth = betterAuth({
 		defaultCookieAttributes: {
 			sameSite: "None",
 			secure: true,
+			domain: process.env.ORIGIN as string,
+			path: "/",
+			httpOnly: true,
 		},
 	},
-
+	trustedOrigins: [process.env.ORIGIN as string],
 	emailAndPassword: {
 		enabled: true,
 	},
@@ -21,7 +24,6 @@ export const auth = betterAuth({
 		expiresIn: 10 * 60, // 10 min
 		updateAge: 1 * 60, // 1 min
 	},
-	trustedOrigins: [process.env.ORIGIN as string],
 	socialProviders: {
 		google: {
 			clientId: process.env.GOOGLE_CLIENT_ID as string,
