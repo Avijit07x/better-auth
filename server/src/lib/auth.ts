@@ -9,12 +9,18 @@ export const auth = betterAuth({
 	database: mongodbAdapter(db),
 	advanced: {
 		useSecureCookies: true,
+		crossSubDomainCookies: {
+			enabled: true,
+			domain: process.env.ORIGIN!,
+		},
 	},
+
 	emailAndPassword: {
 		enabled: true,
 	},
 	session: {
 		expiresIn: 10 * 60, // 10 min
+
 		updateAge: 1 * 60, // 1 min
 	},
 	trustedOrigins: [process.env.ORIGIN as string],
