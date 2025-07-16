@@ -5,7 +5,7 @@ import { authClient } from "./lib/auth-client";
 
 const App = () => {
 	const { data: session, isPending } = authClient.useSession();
-	const [authChoice, setAuthChoice] = useState<any>(null);
+	const [authChoice, setAuthChoice] = useState<string | null>(null);
 
 	const handleSignOut = async () => {
 		await authClient.signOut();
