@@ -8,10 +8,13 @@ const db = client.db("auth");
 export const auth = betterAuth({
 	database: mongodbAdapter(db),
 	advanced: {
-		useSecureCookies: true,
 		crossSubDomainCookies: {
 			enabled: true,
 			domain: process.env.ORIGIN!,
+		},
+		defaultCookieAttributes: {
+			sameSite: "None",
+			secure: true,
 		},
 	},
 
@@ -20,7 +23,6 @@ export const auth = betterAuth({
 	},
 	session: {
 		expiresIn: 10 * 60, // 10 min
-
 		updateAge: 1 * 60, // 1 min
 	},
 	trustedOrigins: [process.env.ORIGIN as string],
