@@ -36,7 +36,7 @@ function RegisterForm() {
 		try {
 			const data = await authClient.signIn.social({
 				provider: method,
-				callbackURL: "http://localhost:5173",
+				callbackURL: import.meta.env.VITE_BASE_URL,
 			});
 			console.log(data);
 		} catch (error) {

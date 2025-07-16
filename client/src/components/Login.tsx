@@ -30,22 +30,11 @@ const Login = () => {
 		);
 	};
 
-	const signInWithGoogle = async () => {
+	const signInWithSocial = async (method: any) => {
 		try {
 			const data = await authClient.signIn.social({
-				provider: "google",
-				callbackURL: "http://localhost:5173",
-			});
-			console.log(data);
-		} catch (error) {
-			console.log(error);
-		}
-	};
-	const signInWithGithub = async () => {
-		try {
-			const data = await authClient.signIn.social({
-				provider: "github",
-				callbackURL: "http://localhost:5173",
+				provider: method,
+				callbackURL: import.meta.env.VITE_BASE_URL,
 			});
 			console.log(data);
 		} catch (error) {
@@ -110,13 +99,13 @@ const Login = () => {
 					<div className="h-px w-full bg-gray-400/50"></div>
 				</div>
 				<button
-					onClick={signInWithGoogle}
+					onClick={() => signInWithSocial("google")}
 					className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
 				>
 					Google
 				</button>
 				<button
-					onClick={signInWithGithub}
+					onClick={() => signInWithSocial("github")}
 					className="w-full bg-blue-600 hover:bg-blue-700 mt-1.5 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
 				>
 					Github
