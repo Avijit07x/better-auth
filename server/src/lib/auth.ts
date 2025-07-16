@@ -11,9 +11,6 @@ export const auth = betterAuth({
 		defaultCookieAttributes: {
 			sameSite: "None",
 			secure: true,
-			domain: process.env.ORIGIN as string,
-			path: "/",
-			httpOnly: true,
 		},
 	},
 	trustedOrigins: [process.env.ORIGIN as string],
