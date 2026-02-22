@@ -1,4 +1,3 @@
-// auth.ts
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { client } from "../db/db.js";
@@ -10,8 +9,16 @@ export const auth = betterAuth({
 	database: mongodbAdapter(db),
 	trustedOrigins: [process.env.ORIGIN as string],
 	advanced: {
+		useSecureCookies: isProd,
 		cookies: {
 			session_token: {
+				attributes: {
+					sameSite: isProd ? "none" : "lax",
+					secure: isProd,
+					httpOnly: true,
+				},
+			},
+			state: {
 				attributes: {
 					sameSite: isProd ? "none" : "lax",
 					secure: isProd,
@@ -38,4 +45,3 @@ export const auth = betterAuth({
 		},
 	},
 });
-
