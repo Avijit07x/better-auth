@@ -10,21 +10,9 @@ export const auth = betterAuth({
 	trustedOrigins: [process.env.ORIGIN as string],
 	advanced: {
 		useSecureCookies: isProd,
-		cookies: {
-			session_token: {
-				attributes: {
-					sameSite: isProd ? "none" : "lax",
-					secure: isProd,
-					httpOnly: true,
-				},
-			},
-			state: {
-				attributes: {
-					sameSite: isProd ? "none" : "lax",
-					secure: isProd,
-					httpOnly: true,
-				},
-			},
+		defaultCookieAttributes: {
+			sameSite: isProd ? "none" : "lax",
+			secure: isProd,
 		},
 	},
 	emailAndPassword: {
