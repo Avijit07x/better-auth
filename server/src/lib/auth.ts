@@ -8,6 +8,9 @@ const isProd = process.env.NODE_ENV === "production";
 export const auth = betterAuth({
 	database: mongodbAdapter(db),
 	trustedOrigins: [process.env.ORIGIN as string],
+	account: {
+		storeStateStrategy: "cookie",
+	},
 	advanced: {
 		useSecureCookies: isProd,
 		defaultCookieAttributes: {
