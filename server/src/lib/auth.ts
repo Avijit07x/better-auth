@@ -3,21 +3,10 @@ import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { client } from "../db/db.js";
 
 const db = client.db("auth");
-const isProd = process.env.NODE_ENV === "production";
 
 export const auth = betterAuth({
 	database: mongodbAdapter(db),
 	trustedOrigins: [process.env.ORIGIN as string],
-	account: {
-		storeStateStrategy: "cookie",
-	},
-	advanced: {
-		useSecureCookies: isProd,
-		defaultCookieAttributes: {
-			sameSite: isProd ? "none" : "lax",
-			secure: isProd,
-		},
-	},
 	emailAndPassword: {
 		enabled: true,
 	},
