@@ -17,16 +17,22 @@ const Login = () => {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		await authClient.signIn.email(
-			{
-				email: formData.email,
-				password: formData.password,
-			},
-			{
-				onSuccess: (ctx) =>
-					console.log("User registered successfully" + ctx),
-			}
-		);
+		try {
+			await authClient.signIn.email(
+				{
+					email: formData.email,
+					password: formData.password,
+				},
+				{
+					onSuccess: (ctx) =>
+						console.log("User registered successfully" + ctx),
+					onError: (err) =>
+						console.log("Error registering user: " + err),
+				}
+			);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const signInWithSocial = async (method: any) => {
